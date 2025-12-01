@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Checklist - Grocery Store Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .phase {
+            margin: 30px 0;
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+        }
+        
+        .phase-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .phase-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .checklist-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checkbox.checked {
+            background: #667eea;
+            color: white;
+        }
+        
+        .checkbox.checked::after {
+            content: '✓';
+            font-weight: bold;
+        }
+        
+        .item-content {
+            flex: 1;
+        }
+        
+        .item-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .item-description {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .status-box {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .status-box.incomplete {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+        }
+        
+        .status-box.complete {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+        
+        .status-box h2 {
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 10px 5px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+        }
+        
+        .time-estimate {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Installation Checklist</h1>
+            <p>Grocery Store Project Setup Guide</p>
+        </div>
+        
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+            
+            <div class="status-box incomplete" id="statusBox">
+                <h2>⏳ Installation In Progress</h2>
+                <p>Complete all steps below to finish setup</p>
+            </div>
+            
+            <!-- Phase 1: Download -->
+            <div class="phase">
+                <div class="phase-title">
+                    <span class="phase-icon">📥</span>
+                    Phase 1: Download Software
+                    <span class="time-estimate">⏱️ 10 min</span>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Download XAMPP</div>
+                        <div class="item-description">
+                            Go to <strong>https://www.apachefriends.org/download.html</strong> and download XAMPP for Windows (latest version)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Verify Download</div>
+                        <div class="item-description">
+                            Check your Downloads folder for <strong>xampp-windows-x64-8.x.x-x-VS16-installer.exe</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 2: Install XAMPP -->
+            <div class="phase">
+                <div class="phase-title">
+                    <span class="phase-icon">⚙️</span>
+                    Phase 2: Install XAMPP
+                    <span class="time-estimate">⏱️ 15 min</span>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Run Installer as Administrator</div>
+                        <div class="item-description">
+                            Right-click the installer → "Run as administrator"
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Select Components</div>
+                        <div class="item-description">
+                            Keep checked: Apache, MySQL, PHP, phpMyAdmin
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Choose Installation Folder</div>
+                        <div class="item-description">
+                            Install to <strong>C:\xampp</strong> (recommended)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Complete Installation</div>
+                        <div class="item-description">
+                            Wait for installation to finish (5-10 minutes)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Allow Firewall Access</div>
+                        <div class="item-description">
+                            When Windows Firewall prompts, click "Allow access"
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 3: Start Services -->
+            <div class="phase">
+                <div class="phase-title">
+                    <span class="phase-icon">🚀</span>
+                    Phase 3: Start XAMPP Services
+                    <span class="time-estimate">⏱️ 5 min</span>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Open XAMPP Control Panel</div>
+                        <div class="item-description">
+                            Start Menu → Search "XAMPP" → Run as Administrator
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Start Apache</div>
+                        <div class="item-description">
+                            Click "Start" next to Apache (should turn green)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Start MySQL</div>
+                        <div class="item-description">
+                            Click "Start" next to MySQL (should turn green)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Verify XAMPP Works</div>
+                        <div class="item-description">
+                            Open browser → Go to <strong>http://localhost</strong> → Should see XAMPP welcome page
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 4: Configure PHP -->
+            <div class="phase">
+                <div class="phase-title">
+                    <span class="phase-icon">🔧</span>
+                    Phase 4: Configure PHP PATH
+                    <span class="time-estimate">⏱️ 10 min</span>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Open PowerShell as Administrator</div>
+                        <div class="item-description">
+                            Press Win + X → Select "Windows PowerShell (Admin)" or "Terminal (Admin)"
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Navigate to Project Folder</div>
+                        <div class="item-description">
+                            Run: <code>cd "E:\CLG_Fun_Projects\Project\grocery store\grocery store"</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Run Setup Script</div>
+                        <div class="item-description">
+                            Run: <code>.\setup_php_path_xampp.ps1</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Restart Computer</div>
+                        <div class="item-description">
+                            <strong>IMPORTANT:</strong> Restart your computer for PATH changes to take effect
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Verify PHP Command</div>
+                        <div class="item-description">
+                            After restart, open PowerShell → Run: <code>php --version</code> → Should show PHP 8.x
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 5: Setup Database -->
+            <div class="phase">
+                <div class="phase-title">
+                    <span class="phase-icon">🗄️</span>
+                    Phase 5: Setup Database
+                    <span class="time-estimate">⏱️ 10 min</span>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Open phpMyAdmin</div>
+                        <div class="item-description">
+                            Go to <strong>http://localhost/phpmyadmin</strong> in your browser
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Create Database</div>
+                        <div class="item-description">
+                            Click "New" → Database name: <strong>shop_db</strong> → Collation: utf8mb4_general_ci → Create
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Import SQL File</div>
+                        <div class="item-description">
+                            Click "shop_db" → Import tab → Choose file: <strong>shop_db.sql</strong> → Click "Import"
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Verify Tables</div>
+                        <div class="item-description">
+                            Check that tables are visible in the left sidebar (products, users, orders, etc.)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 6: Test Installation -->
+            <div class="phase">
+                <div class="phase-title">
+                    <span class="phase-icon">✅</span>
+                    Phase 6: Test Installation
+                    <span class="time-estimate">⏱️ 5 min</span>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Start PHP Development Server</div>
+                        <div class="item-description">
+                            PowerShell: <code>cd "E:\CLG_Fun_Projects\Project\grocery store\grocery store"</code> then <code>php -S localhost:8000</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Run Installation Test</div>
+                        <div class="item-description">
+                            Open browser → Go to <strong>http://localhost:8000/test_setup.php</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Verify All Tests Pass</div>
+                        <div class="item-description">
+                            All items on test page should show green checkmarks ✅
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Test Home Page</div>
+                        <div class="item-description">
+                            Go to <strong>http://localhost:8000/home.php</strong> → Should load without errors
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn" onclick="window.location.href='test_setup.php'">
+                    🧪 Run Installation Test
+                </button>
+                <button class="btn btn-secondary" onclick="resetChecklist()">
+                    🔄 Reset Checklist
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Grocery Store Project</strong> - Installation Checklist</p>
+            <p>Total Steps: <span id="totalSteps">0</span> | Completed: <span id="completedSteps">0</span></p>
+        </div>
+    </div>
+    
+    <script>
+        // Load saved progress
+        function loadProgress() {
+            const saved = localStorage.getItem('installationProgress');
+            if (saved) {
+                const checked = JSON.parse(saved);
+                document.querySelectorAll('.checklist-item').forEach((item, index) => {
+                    if (checked[index]) {
+                        item.querySelector('.checkbox').classList.add('checked');
+                    }
+                });
+            }
+            updateProgress();
+        }
+        
+        // Toggle checkbox
+        function toggleCheck(item) {
+            const checkbox = item.querySelector('.checkbox');
+            checkbox.classList.toggle('checked');
+            saveProgress();
+            updateProgress();
+        }
+        
+        // Save progress
+        function saveProgress() {
+            const items = document.querySelectorAll('.checklist-item');
+            const checked = Array.from(items).map(item => 
+                item.querySelector('.checkbox').classList.contains('checked')
+            );
+            localStorage.setItem('installationProgress', JSON.stringify(checked));
+        }
+        
+        // Update progress bar
+        function updateProgress() {
+            const items = document.querySelectorAll('.checklist-item');
+            const total = items.length;
+            const completed = document.querySelectorAll('.checkbox.checked').length;
+            const percentage = Math.round((completed / total) * 100);
+            
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressBar').textContent = percentage + '%';
+            document.getElementById('totalSteps').textContent = total;
+            document.getElementById('completedSteps').textContent = completed;
+            
+            const statusBox = document.getElementById('statusBox');
+            if (completed === total) {
+                statusBox.className = 'status-box complete';
+                statusBox.innerHTML = '<h2>🎉 Installation Complete!</h2><p>All steps completed. You\'re ready to start developing!</p>';
+            } else {
+                statusBox.className = 'status-box incomplete';
+                statusBox.innerHTML = '<h2>⏳ Installation In Progress</h2><p>Complete all steps below to finish setup (' + completed + '/' + total + ')</p>';
+            }
+        }
+        
+        // Reset checklist
+        function resetChecklist() {
+            if (confirm('Are you sure you want to reset the checklist?')) {
+                localStorage.removeItem('installationProgress');
+                document.querySelectorAll('.checkbox').forEach(checkbox => {
+                    checkbox.classList.remove('checked');
+                });
+                updateProgress();
+            }
+        }
+        
+        // Initialize
+        loadProgress();
+    </script>
+</body>
+</html>

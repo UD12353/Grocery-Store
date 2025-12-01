@@ -1,0 +1,212 @@
+/* ================================================
+   QUICK VIEW MODAL STYLES
+   Modern product quick view popup
+   ================================================ */
+
+/* Modal Overlay - Dark background */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+/* Modal Container */
+.quick-view-modal {
+    background: #fff;
+    border-radius: 1rem;
+    max-width: 80rem;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(5rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
+.modal-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 4rem;
+    height: 4rem;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    background: var(--black);
+    transform: rotate(90deg);
+}
+
+/* Modal Content */
+.modal-content {
+    display: flex;
+    gap: 3rem;
+    padding: 3rem;
+}
+
+.modal-image {
+    flex: 1;
+    max-width: 40rem;
+}
+
+.modal-image img {
+    width: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+.modal-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.modal-product-name {
+    font-size: 3rem;
+    color: var(--black);
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.modal-product-price {
+    font-size: 3.5rem;
+    color: var(--green);
+    font-weight: 700;
+}
+
+.modal-product-price span {
+    font-size: 2rem;
+    color: var(--light-color);
+    text-decoration: line-through;
+    margin-left: 1rem;
+}
+
+.modal-product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modal-product-rating .stars {
+    color: var(--orange);
+    font-size: 2rem;
+}
+
+.modal-product-rating .rating-text {
+    color: var(--light-color);
+    font-size: 1.6rem;
+    margin-left: 0.5rem;
+}
+
+.modal-product-description {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    color: var(--light-color);
+    padding: 1.5rem;
+    background: var(--light-bg);
+    border-radius: 0.5rem;
+}
+
+.modal-product-category {
+    font-size: 1.6rem;
+    color: var(--light-color);
+}
+
+.modal-product-category span {
+    color: var(--green);
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.modal-quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal-quantity-selector label {
+    font-size: 1.8rem;
+    color: var(--black);
+    font-weight: 500;
+}
+
+.modal-quantity-selector input {
+    width: 10rem;
+    padding: 1rem;
+    font-size: 1.8rem;
+    border: var(--border);
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: auto;
+}
+
+.modal-actions .btn,
+.modal-actions .option-btn {
+    flex: 1;
+    margin: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .modal-content {
+        flex-direction: column;
+        padding: 2rem;
+    }
+    
+    .modal-image {
+        max-width: 100%;
+    }
+    
+    .modal-product-name {
+        font-size: 2.5rem;
+    }
+    
+    .modal-product-price {
+        font-size: 3rem;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+}
